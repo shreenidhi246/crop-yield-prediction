@@ -4,6 +4,7 @@ import joblib
 from google.cloud import bigquery
 import os
 import matplotlib.pyplot as plt
+from google.auth import default
 
 st.set_page_config(layout="wide")
 
@@ -179,7 +180,12 @@ le_season = joblib.load("le_season.pkl")
 @st.cache_data(ttl=60)
 def load_data():
 
-    client = bigquery.Client()
+    credentials, project = default()
+
+    client = bigquery.Client(
+        credentials=credentials,
+        project="smart-agriculture-488414"
+    )
 
     query = """
     SELECT state, crop, season, year, area, production
