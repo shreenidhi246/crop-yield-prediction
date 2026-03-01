@@ -176,15 +176,19 @@ le_season = joblib.load("le_season.pkl")
 # BIGQUERY
 # -------------------------
 
-client = bigquery.Client(location="asia-south1")
+@st.cache_data(ttl=60)
+def load_data():
 
-query = """
-SELECT state, crop, season, year, area, production
-FROM `smart-agriculture-488414.smart_yield.crop_data`
-"""
+    client = bigquery.Client()
 
-df = client.query(query).to_dataframe()
+    query = """
+    SELECT state, crop, season, year, area, production
+    FROM `smart-agriculture-488414.smart_yield.crop_data`
+    """
 
+    return client.query(query).to_dataframe()
+
+df = load_data()
 
 # -------------------------
 # TITLE
