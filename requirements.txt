@@ -1,8 +1,8 @@
 streamlit
 pandas
-numpy
 scikit-learn
-joblib
 matplotlib
+joblib
 google-cloud-bigquery
+google-auth
 db-dtypes
