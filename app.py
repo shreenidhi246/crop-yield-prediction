@@ -180,7 +180,9 @@ le_season = joblib.load("le_season.pkl")
 @st.cache_data(ttl=60)
 def load_data():
 
-    credentials, project = default()
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"]
+    )
 
     client = bigquery.Client(
         credentials=credentials,
