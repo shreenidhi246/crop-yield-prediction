@@ -4,6 +4,7 @@ import joblib
 from google.cloud import bigquery
 import os
 import matplotlib.pyplot as plt
+from google.oauth2 import service_account
 from google.auth import default
 
 st.set_page_config(layout="wide")
